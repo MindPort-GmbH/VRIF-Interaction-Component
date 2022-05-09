@@ -2,7 +2,8 @@
     "name": "VRBuilder.VRIF",
     "rootNamespace": "",
     "references": [
-        "GUID:c8561f9de838ac04d8feeda695bc572d"
+        "GUID:c8561f9de838ac04d8feeda695bc572d",
+        "GUID:474da18fc7b8c9c4c9db09e343483375"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
