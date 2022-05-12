@@ -7,8 +7,10 @@ namespace VRBuilder.VRIF.Rigs
     /// </summary>
     public class XRRigSetup : InteractionRigProvider
     {
+        /// <inheritdoc/>
         public override string Name => "XR Rig";
 
+        /// <inheritdoc/>
         public override string PrefabName => "XR Rig";
     }
 }
