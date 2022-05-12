@@ -8,8 +8,6 @@ namespace VRBuilder.VRIF.Properties
 {
     [AddComponentMenu("VR Builder/Properties/Interhaptics/Grabbable Property (VRIF)")]
     [RequireComponent(typeof(GrabbableUnityEvents))]
-    // Since Grabbable does not work without a rigid body, but does not strictly require it, we add the requirement here.
-    [RequireComponent(typeof(Rigidbody))]
     public class GrabbableProperty : LockableProperty, IGrabbableProperty
     {
         [SerializeField]

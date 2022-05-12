@@ -19,10 +19,15 @@ namespace VRBuilder.Editor.VRIF.UI
             {
                 EditorGUILayout.HelpBox("The grabbable's secondary grab behavior is not set to dual grab. It will not be possible to grab this object with two hands and therefore fulfill any conditions depending on it.", MessageType.Warning);
 
-                if(GUILayout.Button("Fix it"))
+                if(GUILayout.Button("Set to dual grab"))
                 {
                     grabbable.SecondaryGrabBehavior = OtherGrabBehavior.DualGrab;
                 }
+            }
+
+            if(property.GetComponent<Rigidbody>() == null)
+            {
+                EditorGUILayout.HelpBox("No rigidbody is present on this grabbable. A rigidbody is necessary if the object is not meant to be stationary, that is if the Grab Physics setting on the grabbable is set to anything other than None.", MessageType.Warning);
             }
         }
     }
