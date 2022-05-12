@@ -11,6 +11,7 @@ namespace VRBuilder.VRIF.Properties
     public class GrabbableProperty : LockableProperty, IGrabbableProperty
     {
         [SerializeField]
+        [Tooltip("If true, the object will count as grabbed only if grabbed with two hands. Note that it may still be possible to grab and move the object with one hand, but the condition will not trigger.")]
         private bool requireTwoHandGrab = false;
 
         private Grabbable grabbable;
@@ -19,8 +20,12 @@ namespace VRBuilder.VRIF.Properties
         public event EventHandler<EventArgs> Grabbed;
         public event EventHandler<EventArgs> Ungrabbed;
 
+        /// <inheritdoc/>
         public bool IsGrabbed => requireTwoHandGrab ? Grabbable.BeingHeldWithTwoHands : Grabbable.BeingHeld;
 
+        /// <summary>
+        /// If true, the object will count as grabbed only if grabbed with two hands. Note that it may still be possible to grab and move the object with one hand, but the condition will not trigger.       
+        /// </summary>
         public bool RequireTwoHandGrab => requireTwoHandGrab;
 
         protected Grabbable Grabbable
@@ -75,35 +80,32 @@ namespace VRBuilder.VRIF.Properties
             Grabbed?.Invoke(this, EventArgs.Empty);
         }
 
-
         protected override void InternalSetLocked(bool lockState)
         {
-            if (IsGrabbed)
-            {
-                if (lockState)
-                {
-                    Grabbable.Release(Vector3.zero, Vector3.zero);
-                }
-            }
-
-            if (lockState)
-            {
-                Grabbable.LockGrabbableWithRotation();
-            }
-            else
-            {
-                Grabbable.UnlockGrabbable();
-            }
+            Grabbable.DropItem(true, true);
+            Grabbable.enabled = !lockState;
         }
 
         public void FastForwardGrab()
         {
-            throw new NotImplementedException();
+            if(IsGrabbed)
+            {
+                Grabbable.DropItem(true, true);
+            }
+
+            Grabbed?.Invoke(this, EventArgs.Empty);
+            Ungrabbed?.Invoke(this, EventArgs.Empty);
         }
 
         public void FastForwardUngrab()
         {
-            throw new NotImplementedException();
+            if (IsGrabbed)
+            {
+                Grabbable.DropItem(true, true);
+            }
+
+            Grabbed?.Invoke(this, EventArgs.Empty);
+            Ungrabbed?.Invoke(this, EventArgs.Empty);
         }
     }
 }
