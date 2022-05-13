@@ -10,7 +10,7 @@ namespace VRBuilder.VRIF.Properties
     [RequireComponent(typeof(GrabbableUnityEvents))]
     public class UsableProperty : LockableProperty, IUsableProperty
     {
-        public bool IsBeingUsed => throw new NotImplementedException();
+        public bool IsBeingUsed { get; private set; }
 
         public event EventHandler<EventArgs> UsageStarted;
         public event EventHandler<EventArgs> UsageStopped;
@@ -48,6 +48,7 @@ namespace VRBuilder.VRIF.Properties
         {
             base.OnEnable();
             GrabbableEvents.onTriggerDown.AddListener(HandleUsed);
+            GrabbableEvents.onTriggerUp.AddListener(HandleUnused);
 
             InternalSetLocked(IsLocked);
         }
@@ -56,11 +57,17 @@ namespace VRBuilder.VRIF.Properties
         {
             base.OnDisable();
             GrabbableEvents.onTriggerDown.RemoveListener(HandleUsed);
+            GrabbableEvents.onTriggerUp.RemoveListener(HandleUnused);
         }
 
         private void HandleUsed()
         {
-            throw new NotImplementedException();
+            IsBeingUsed = true;
+        }
+
+        private void HandleUnused()
+        {
+            IsBeingUsed = false;
         }
 
         public void FastForwardUse()
@@ -70,7 +77,8 @@ namespace VRBuilder.VRIF.Properties
 
         protected override void InternalSetLocked(bool lockState)
         {
-            throw new System.NotImplementedException();
+            //Grabbable.DropItem(true, true);
+            //Grabbable.enabled = !lockState;
         }
     }
 }
