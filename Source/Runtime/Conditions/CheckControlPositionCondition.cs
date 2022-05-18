@@ -9,9 +9,9 @@ using VRBuilder.VRIF.Properties;
 namespace VRBuilder.VRIF.Conditions
 {
     [DataContract(IsReference = true)]
-    public class LinearControlAtPositionCondition : Condition<LinearControlAtPositionCondition.EntityData>
+    public class CheckControlPositionCondition : Condition<CheckControlPositionCondition.EntityData>
     {
-        [DisplayName("Control at Position")]
+        [DisplayName("Check Control Position")]
         public class EntityData : IConditionData
         {
             [DataMember]
@@ -68,15 +68,15 @@ namespace VRBuilder.VRIF.Conditions
             }
         }
 
-        public LinearControlAtPositionCondition() : this("", 0)
+        public CheckControlPositionCondition() : this("", 0)
         {
         }
 
-        public LinearControlAtPositionCondition(ILinearControlProperty control, float requiredPosition, float tolerance = 0.1f, bool requireRelease = false, string name = null) : this(ProcessReferenceUtils.GetNameFrom(control), requiredPosition, tolerance, requireRelease, name)
+        public CheckControlPositionCondition(ILinearControlProperty control, float requiredPosition, float tolerance = 0.1f, bool requireRelease = false, string name = null) : this(ProcessReferenceUtils.GetNameFrom(control), requiredPosition, tolerance, requireRelease, name)
         {
         }
 
-        public LinearControlAtPositionCondition(string controlName, float requiredPosition, float tolerance = 0.1f, bool requireRelease = false, string name = "Control at position")
+        public CheckControlPositionCondition(string controlName, float requiredPosition, float tolerance = 0.1f, bool requireRelease = false, string name = "Check Control Position")
         {
             Data.ControlProperty = new ScenePropertyReference<ILinearControlProperty>(controlName);
             Data.RequiredPosition = requiredPosition;

@@ -4,13 +4,13 @@ using VRBuilder.VRIF.Conditions;
 
 namespace VRBuilder.Editor.VRIF.UI.Conditions
 {
-    public class LinearControlAtPositionMenuItem : MenuItem<ICondition>
+    public class CheckControlPositionMenuItem : MenuItem<ICondition>
     {
-        public override string DisplayedName => "Interaction/Linear Control at Position";
+        public override string DisplayedName => "Interaction/Check Control Position";
 
         public override ICondition GetNewItem()
         {
-            return new LinearControlAtPositionCondition();
+            return new CheckControlPositionCondition();
         }
     }
 }
