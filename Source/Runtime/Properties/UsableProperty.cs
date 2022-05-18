@@ -63,11 +63,13 @@ namespace VRBuilder.VRIF.Properties
         private void HandleUsed()
         {
             IsBeingUsed = true;
+            UsageStarted?.Invoke(this, EventArgs.Empty);
         }
 
         private void HandleUnused()
         {
             IsBeingUsed = false;
+            UsageStopped?.Invoke(this, EventArgs.Empty);
         }
 
         public void FastForwardUse()

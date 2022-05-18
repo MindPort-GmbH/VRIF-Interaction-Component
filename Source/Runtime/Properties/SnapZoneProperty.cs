@@ -18,7 +18,7 @@ namespace VRBuilder.VRIF.Properties
             {
                 if(snapZone == null)
                 {
-                    snapZone = new SnapZone();
+                    snapZone = GetComponent<SnapZone>();
                 }
 
                 return snapZone;
@@ -27,7 +27,8 @@ namespace VRBuilder.VRIF.Properties
 
         public bool IsObjectSnapped => SnapZone.HeldItem != null;
 
-        public ISnappableProperty SnappedObject { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public ISnappableProperty SnappedObject { get; set; }
+
 
         public GameObject SnapZoneObject => snapZone.gameObject;
 
@@ -37,11 +38,37 @@ namespace VRBuilder.VRIF.Properties
         protected override void OnEnable()
         {
             base.OnEnable();
+            SnapZone.OnSnapEvent.AddListener(HandleSnapped);
+            SnapZone.OnDetachEvent.AddListener(HandleUnsnapped);
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
+            SnapZone.OnSnapEvent.RemoveListener(HandleSnapped);
+            SnapZone.OnDetachEvent.RemoveListener(HandleUnsnapped);
+        }
+
+        private void HandleSnapped(Grabbable grabbable)
+        {
+            SnappedObject = grabbable.GetComponent<SnappableProperty>();
+            if (SnappedObject == null)
+            {
+                Debug.LogWarning($"SnapZone '{SceneObject.UniqueName}' received snap from object '{grabbable.gameObject.name}' without {typeof(SnappableProperty).Name}");
+            }
+            else
+            {
+                ObjectSnapped?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        private void HandleUnsnapped(Grabbable grabbable)
+        {
+            if (SnappedObject != null)
+            {
+                SnappedObject = null;
+                ObjectUnsnapped?.Invoke(this, EventArgs.Empty);
+            }
         }
 
         public void Configure(IMode mode)
@@ -49,7 +76,8 @@ namespace VRBuilder.VRIF.Properties
         }
 
         protected override void InternalSetLocked(bool lockState)
-        {            
+        {
+            //SnapZone.enabled = lockState == false || (SnappedObject != null);
         }
     }
 }

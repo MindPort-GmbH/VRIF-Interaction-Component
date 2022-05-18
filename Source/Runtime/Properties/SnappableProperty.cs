@@ -1,3 +1,4 @@
+using BNG;
 using System;
 using UnityEngine;
 using VRBuilder.BasicInteraction.Properties;
@@ -26,9 +27,9 @@ namespace VRBuilder.VRIF.Properties
 
         public bool LockObjectOnSnap => throw new NotImplementedException();
 
-        public ISnapZoneProperty SnappedZone { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public ISnapZoneProperty SnappedZone { get; set; }
 
-        public bool IsSnapped => throw new NotImplementedException();
+        public bool IsSnapped => GrabbableProperty.transform.parent != null && GrabbableProperty.transform.parent.GetComponent<SnapZone>() != null;
 
         public event EventHandler<EventArgs> Snapped;
         public event EventHandler<EventArgs> Unsnapped;
@@ -51,12 +52,31 @@ namespace VRBuilder.VRIF.Properties
 
         private void HandleUnsnapped()
         {
-            Debug.Log("Unsnapped");
+            Unsnapped?.Invoke(this, EventArgs.Empty);
         }
 
         private void HandleSnapped()
         {
-            Debug.Log("Snapped");
+            // TODO support lock on snap
+
+            Transform parent = transform.parent;
+            
+            if(parent == null)
+            {
+                Debug.LogError($"Object {SceneObject.UniqueName} should be snapped but is not child object.");
+                return;
+            }
+
+            SnapZoneProperty snapZone = parent.GetComponent<SnapZoneProperty>();
+
+            if (snapZone == null)
+            {
+                Debug.LogError($"Object {SceneObject.UniqueName} should be snapped but is not child of a {typeof(SnapZoneProperty).Name}.");
+                return;
+            }
+
+            SnappedZone = snapZone;
+            Snapped?.Invoke(this, EventArgs.Empty);
         }
 
         public void FastForwardSnapInto(ISnapZoneProperty snapZone)
