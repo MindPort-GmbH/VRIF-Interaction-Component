@@ -74,7 +74,8 @@ namespace VRBuilder.VRIF.Properties
 
         public void FastForwardUse()
         {
-            throw new NotImplementedException();
+            HandleUsed();
+            HandleUnused();
         }
 
         protected override void InternalSetLocked(bool lockState)

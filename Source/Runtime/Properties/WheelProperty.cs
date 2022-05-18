@@ -7,6 +7,7 @@ namespace VRBuilder.VRIF.Properties
 {
     [AddComponentMenu("VR Builder/Properties/VRIF/Wheel Property (VRIF)")]
     [RequireComponent(typeof(SteeringWheel))]
+    [RequireComponent(typeof(GrabbableProperty))]
     public class WheelProperty : LockableProperty, ILinearControlProperty
     {
         private SteeringWheel wheel;
@@ -24,7 +25,25 @@ namespace VRBuilder.VRIF.Properties
             }
         }
 
+
+        private GrabbableProperty grabbableProperty;
+
+        public GrabbableProperty GrabbableProperty
+        {
+            get
+            {
+                if (grabbableProperty == null)
+                {
+                    grabbableProperty = GetComponent<GrabbableProperty>();
+                }
+
+                return grabbableProperty;
+            }
+        }
+
         public float Position => Wheel.GetScaledValue(Wheel.Angle, Wheel.MinAngle, Wheel.MaxAngle);
+
+        public bool IsInteracting => GrabbableProperty.IsGrabbed;
 
         public event EventHandler<EventArgs> MinPosition;
         public event EventHandler<EventArgs> MaxPosition;
@@ -61,12 +80,11 @@ namespace VRBuilder.VRIF.Properties
 
         public void FastForwardPosition(float position)
         {
-            throw new NotImplementedException();
+            HandleValueChanged(position);
         }
 
         protected override void InternalSetLocked(bool lockState)
         {
-            //throw new NotImplementedException();
         }
     }
 }

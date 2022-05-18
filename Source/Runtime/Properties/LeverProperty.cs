@@ -6,7 +6,8 @@ using VRBuilder.Core.Properties;
 namespace VRBuilder.VRIF.Properties
 {
     [AddComponentMenu("VR Builder/Properties/VRIF/Lever Property (VRIF)")]
-    [RequireComponent(typeof(Lever))] 
+    [RequireComponent(typeof(Lever))]
+    [RequireComponent(typeof(GrabbableProperty))]
     public class LeverProperty : LockableProperty, ILinearControlProperty
     {
         private Lever lever;
@@ -24,11 +25,28 @@ namespace VRBuilder.VRIF.Properties
             }
         }
 
+        private GrabbableProperty grabbableProperty;
+
+        public GrabbableProperty GrabbableProperty
+        {
+            get
+            {
+                if(grabbableProperty == null)
+                {
+                    grabbableProperty = GetComponent<GrabbableProperty>(); 
+                }
+
+                return grabbableProperty;
+            }
+        }
+
         public event EventHandler<EventArgs> MinPosition;
         public event EventHandler<EventArgs> MaxPosition;
         public event EventHandler<EventArgs> ChangedPosition;
 
         public float Position => Lever.LeverPercentage / 100;
+
+        public bool IsInteracting => GrabbableProperty.IsGrabbed;
 
         protected override void OnEnable()
         {
@@ -68,7 +86,6 @@ namespace VRBuilder.VRIF.Properties
 
         protected override void InternalSetLocked(bool lockState)
         {
-            //throw new System.NotImplementedException();            
         }
     }
 }
