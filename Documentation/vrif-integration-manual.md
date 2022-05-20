@@ -56,7 +56,7 @@ These can be added to a game object with respectively the `Lever` or `Driving Wh
 
 ![Check Control Position](images/check-control-position.png)
 
-This condition triggers when a movable object like a lever or a wheel reaches a specified position. The position is normalized from 0 (down) to 1 (up) for a lever, and from -1 to 1 for a driving wheel.
+This condition triggers when a movable object like a lever or a wheel reaches a position within a range. The position is normalized from 0 (down) to 1 (up) for a lever, and from -1 to 1 for a driving wheel.
 
 #### Configuration
 
@@ -64,13 +64,13 @@ This condition triggers when a movable object like a lever or a wheel reaches a 
 
     The object whose position we want to check. The game object referenced here should be the one with the `Lever` or `Driving Wheel` component, not necessarily the root object. Please manually add a `Lever Property` or `Wheel Property` instead of relying on the `Fix it` button. As they are implementations of the same interface, it is not possible at this time to automatically select the correct property.
 
-- **Required position**
+- **Min position**
 
-    The position which will cause the condition to complete.
+    The minimum position which will be considered valid by the condition.
 
-- **Tolerance**
+- **Max position**
 
-    Tolerance
+    The maximum position which will be considered valid by the condition.
 
 - **Require release**
 
