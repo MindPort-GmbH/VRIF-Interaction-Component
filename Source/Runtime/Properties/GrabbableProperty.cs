@@ -7,7 +7,7 @@ using VRBuilder.Core.Properties;
 namespace VRBuilder.VRIF.Properties
 {
     [AddComponentMenu("VR Builder/Properties/VRIF/Grabbable Property (VRIF)")]
-    [RequireComponent(typeof(GrabbableUnityEvents))]
+    [RequireComponent(typeof(TouchableProperty))]
     public class GrabbableProperty : LockableProperty, IGrabbableProperty
     {
         [SerializeField]
