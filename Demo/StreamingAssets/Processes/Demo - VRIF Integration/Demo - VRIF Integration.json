@@ -40,7 +40,7 @@
                       "AudioData": {
                         "$id": "11",
                         "$type": "VRBuilder.TextToSpeech.Audio.TextToSpeechAudio, VRBuilder.TextToSpeech",
-                        "Text": "Welcome to the demo scene of the integration between VRIF and VR Builder. Start by grabbing the red marker on the table."
+                        "Text": "Welcome to the demo scene of the integration between VRIF and VR Builder. VR Builder guides you through this app, while VRIF provides you with the interactions. Start by grabbing the red marker on the table."
                       },
                       "ExecutionStages": 1,
                       "Volume": 1.0,
@@ -384,7 +384,7 @@
           "$id": "71",
           "$type": "VRBuilder.Core.StepMetadata, VRBuilder.Core",
           "Position": {
-            "x": 564.8,
+            "x": 567.2,
             "y": 0.0
           }
         },
@@ -941,7 +941,7 @@
           "$id": "171",
           "$type": "VRBuilder.Core.StepMetadata, VRBuilder.Core",
           "Position": {
-            "x": 356.8,
+            "x": 356.0,
             "y": 0.0
           }
         },
@@ -1118,7 +1118,7 @@
               "TabsGroup": {
                 "$id": "204",
                 "$type": "System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[System.Object, mscorlib]], mscorlib",
-                "selected": 1
+                "selected": 0
               }
             }
           }
@@ -1159,7 +1159,7 @@
                       "AudioData": {
                         "$id": "213",
                         "$type": "VRBuilder.TextToSpeech.Audio.TextToSpeechAudio, VRBuilder.TextToSpeech",
-                        "Text": "Great. Note that VR Builder does not prevent you from grabbing it with one hand, but the condition only triggers when you grab it with both. Now pull the lever all the way towards you, then release it."
+                        "Text": "Great. Now pull the lever all the way towards you, then release it."
                       },
                       "ExecutionStages": 1,
                       "Volume": 1.0,
@@ -1631,7 +1631,7 @@
               "$id": "298",
               "$type": "VRBuilder.Core.ChapterMetadata, VRBuilder.Core",
               "LastSelectedStep": {
-                "$ref": "105"
+                "$ref": "275"
               },
               "EntryNodePosition": {
                 "x": -274.4,
