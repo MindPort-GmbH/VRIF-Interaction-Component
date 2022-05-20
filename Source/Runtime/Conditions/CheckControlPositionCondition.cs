@@ -1,4 +1,5 @@
 using System.Runtime.Serialization;
+using UnityEngine;
 using VRBuilder.Core;
 using VRBuilder.Core.Attributes;
 using VRBuilder.Core.Conditions;
@@ -19,12 +20,12 @@ namespace VRBuilder.VRIF.Conditions
             public ScenePropertyReference<ILinearControlProperty> ControlProperty { get; set; }
 
             [DataMember]
-            [DisplayName("Required position")]
-            public float RequiredPosition { get; set; }
+            [DisplayName("Min position")]
+            public float MinPosition { get; set; }
 
             [DataMember]
-            [DisplayName("Tolerance")]
-            public float Tolerance { get; set; }
+            [DisplayName("Max position")]
+            public float MaxPosition { get; set; }
 
             [DataMember]
             [DisplayName("Require release")]
@@ -47,7 +48,7 @@ namespace VRBuilder.VRIF.Conditions
 
             public override void Complete()
             {
-                Data.ControlProperty.Value.FastForwardPosition(Data.RequiredPosition);
+                Data.ControlProperty.Value.FastForwardPosition(Data.MinPosition + (Data.MaxPosition - Data.MinPosition) / 2);
             }
         }
 
@@ -55,12 +56,17 @@ namespace VRBuilder.VRIF.Conditions
         {
             protected override bool CheckIfCompleted()
             {
+                if(Data.MinPosition > Data.MaxPosition)
+                {
+                    Debug.LogError($"{typeof(CheckControlPositionCondition).Name} for object {Data.ControlProperty.UniqueName} will never complete as the minimum value is greater than the maximum value.");
+                }
+
                 if(Data.RequireRelease && Data.ControlProperty.Value.IsInteracting)
                 {
                     return false;
                 }
 
-                return Data.ControlProperty.Value.Position >= Data.RequiredPosition - Data.Tolerance && Data.ControlProperty.Value.Position <= Data.RequiredPosition + Data.Tolerance;
+                return Data.ControlProperty.Value.Position >= Data.MinPosition && Data.ControlProperty.Value.Position <= Data.MaxPosition;
             }
 
             public ActiveProcess(EntityData data) : base(data)
@@ -72,15 +78,15 @@ namespace VRBuilder.VRIF.Conditions
         {
         }
 
-        public CheckControlPositionCondition(ILinearControlProperty control, float requiredPosition, float tolerance = 0.1f, bool requireRelease = false, string name = null) : this(ProcessReferenceUtils.GetNameFrom(control), requiredPosition, tolerance, requireRelease, name)
+        public CheckControlPositionCondition(ILinearControlProperty control, float minPosition, float maxPosition, bool requireRelease = false, string name = null) : this(ProcessReferenceUtils.GetNameFrom(control), minPosition, maxPosition, requireRelease, name)
         {
         }
 
-        public CheckControlPositionCondition(string controlName, float requiredPosition, float tolerance = 0.1f, bool requireRelease = false, string name = "Check Control Position")
+        public CheckControlPositionCondition(string controlName, float minPosition, float maxPosition = 0.1f, bool requireRelease = false, string name = "Check Control Position")
         {
             Data.ControlProperty = new ScenePropertyReference<ILinearControlProperty>(controlName);
-            Data.RequiredPosition = requiredPosition;
-            Data.Tolerance = tolerance;
+            Data.MinPosition = minPosition;
+            Data.MaxPosition = maxPosition;
             Data.RequireRelease = requireRelease;
             Data.Name = name;
         }
