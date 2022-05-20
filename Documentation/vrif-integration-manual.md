@@ -26,9 +26,10 @@ This add-on allows to use VR Builder together with VR Interaction Framework. It 
 
 ## Requirements
 
-This add-on requires VR Builder version 2.0.0 or later to work.
+This add-on requires VR Builder version 2.1.0 or later to work.
 
 ## Quick Start
+
 
 
 ## Properties
@@ -44,9 +45,7 @@ Note that a rigidbody is not automatically added to the object, as the `Grabbabl
 This property qualifies the object as "in use" based on the `onTriggerDown` event on the `Grabbable Unity Events` component.
 
 ### Snappable/Snap Zone Property
-These allow to use VRIF snap zones in a VR Builder process. Note that snap zones in VRIF, contrary to the one in the default XR Interaction component, don't snap one specific object by default.
-
-Please refer to the VRIF demos and documentation to learn how to unsnap objects and give visual feedback.
+These allow to use VRIF snap zones in a VR Builder process. Note that snap zones in VRIF, contrary to the one in the default XR Interaction component, don't snap one specific object by default. The `Snap Zone Property` does not perform any automatic configuration on the snap zone itself. Please refer to the VRIF demos and documentation to configure the snap zones.
 
 ### Lever/Wheel Property
 These can be added to a game object with respectively the `Lever` or `Driving Wheel` component. The object can then be used in the `Check Control Position` condition.

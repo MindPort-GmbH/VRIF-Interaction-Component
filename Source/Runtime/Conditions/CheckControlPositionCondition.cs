@@ -74,7 +74,7 @@ namespace VRBuilder.VRIF.Conditions
             }
         }
 
-        public CheckControlPositionCondition() : this("", 0)
+        public CheckControlPositionCondition() : this("")
         {
         }
 
@@ -82,7 +82,7 @@ namespace VRBuilder.VRIF.Conditions
         {
         }
 
-        public CheckControlPositionCondition(string controlName, float minPosition, float maxPosition = 0.1f, bool requireRelease = false, string name = "Check Control Position")
+        public CheckControlPositionCondition(string controlName, float minPosition = 0, float maxPosition = 1, bool requireRelease = false, string name = "Check Control Position")
         {
             Data.ControlProperty = new ScenePropertyReference<ILinearControlProperty>(controlName);
             Data.MinPosition = minPosition;

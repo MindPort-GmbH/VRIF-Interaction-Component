@@ -7,7 +7,7 @@ using VRBuilder.Core.Properties;
 namespace VRBuilder.VRIF.Properties
 {
     [AddComponentMenu("VR Builder/Properties/VRIF/Usable Property (VRIF)")]
-    [RequireComponent(typeof(GrabbableUnityEvents))]
+    [RequireComponent(typeof(GrabbableProperty))]
     public class UsableProperty : LockableProperty, IUsableProperty
     {
         public bool IsBeingUsed { get; private set; }
