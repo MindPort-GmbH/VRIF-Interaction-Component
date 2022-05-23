@@ -1200,7 +1200,7 @@
                               "$type": "VRBuilder.VRIF.Conditions.CheckControlPositionCondition+EntityData, Assembly-CSharp",
                               "ControlProperty": {
                                 "$id": "222",
-                                "$type": "VRBuilder.Core.SceneObjects.ScenePropertyReference`1[[VRBuilder.VRIF.Properties.ILinearControlProperty, Assembly-CSharp]], VRBuilder.Core",
+                                "$type": "VRBuilder.Core.SceneObjects.ScenePropertyReference`1[[VRBuilder.VRIF.Properties.IContinuousControlProperty, Assembly-CSharp]], VRBuilder.Core",
                                 "UniqueName": "Hinge"
                               },
                               "MinPosition": 0.0,
@@ -1393,7 +1393,7 @@
                               "$type": "VRBuilder.VRIF.Conditions.CheckControlPositionCondition+EntityData, Assembly-CSharp",
                               "ControlProperty": {
                                 "$id": "257",
-                                "$type": "VRBuilder.Core.SceneObjects.ScenePropertyReference`1[[VRBuilder.VRIF.Properties.ILinearControlProperty, Assembly-CSharp]], VRBuilder.Core",
+                                "$type": "VRBuilder.Core.SceneObjects.ScenePropertyReference`1[[VRBuilder.VRIF.Properties.IContinuousControlProperty, Assembly-CSharp]], VRBuilder.Core",
                                 "UniqueName": "SteeringWheel Vertical"
                               },
                               "MinPosition": 0.5,

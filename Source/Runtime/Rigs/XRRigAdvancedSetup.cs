@@ -3,7 +3,7 @@ using VRBuilder.BasicInteraction.RigSetup;
 namespace VRBuilder.VRIF.Rigs
 {
     /// <summary>
-    /// Setup for the standard XR rig.
+    /// Setup for the advanced XR rig.
     /// </summary>
     public class XRRigAdvancedSetup : InteractionRigProvider
     {

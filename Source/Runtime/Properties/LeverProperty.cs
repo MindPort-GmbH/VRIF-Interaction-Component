@@ -5,13 +5,19 @@ using VRBuilder.Core.Properties;
 
 namespace VRBuilder.VRIF.Properties
 {
+    /// <summary>
+    /// Property that reads the position of a VRIF lever property as a 0 to 1 value.
+    /// </summary>
     [AddComponentMenu("VR Builder/Properties/VRIF/Lever Property (VRIF)")]
     [RequireComponent(typeof(Lever))]
     [RequireComponent(typeof(GrabbableProperty))]
-    public class LeverProperty : LockableProperty, ILinearControlProperty
+    public class LeverProperty : LockableProperty, IContinuousControlProperty
     {
         private Lever lever;
 
+        /// <summary>
+        /// The Lever component on this game object.
+        /// </summary>
         public Lever Lever
         {
             get
@@ -27,6 +33,9 @@ namespace VRBuilder.VRIF.Properties
 
         private GrabbableProperty grabbableProperty;
 
+        /// <summary>
+        /// The grabbable property on the same game object.
+        /// </summary>
         public GrabbableProperty GrabbableProperty
         {
             get
@@ -40,12 +49,21 @@ namespace VRBuilder.VRIF.Properties
             }
         }
 
+        /// <inheritdoc/>
         public event EventHandler<EventArgs> MinPosition;
+
+        /// <inheritdoc/>
         public event EventHandler<EventArgs> MaxPosition;
+
+        /// <inheritdoc/>
         public event EventHandler<EventArgs> ChangedPosition;
 
+        /// <summary>
+        /// Position of the lever as a 0 to 1 value.
+        /// </summary>
         public float Position => Lever.LeverPercentage / 100;
 
+        /// <inheritdoc/>
         public bool IsInteracting => GrabbableProperty.IsGrabbed;
 
         protected override void OnEnable()

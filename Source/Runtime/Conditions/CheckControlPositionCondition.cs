@@ -9,6 +9,9 @@ using VRBuilder.VRIF.Properties;
 
 namespace VRBuilder.VRIF.Conditions
 {
+    /// <summary>
+    /// Condition that checks if a control like a lever is within a specified range.
+    /// </summary>
     [DataContract(IsReference = true)]
     public class CheckControlPositionCondition : Condition<CheckControlPositionCondition.EntityData>
     {
@@ -17,7 +20,7 @@ namespace VRBuilder.VRIF.Conditions
         {
             [DataMember]
             [DisplayName("Control")]
-            public ScenePropertyReference<ILinearControlProperty> ControlProperty { get; set; }
+            public ScenePropertyReference<IContinuousControlProperty> ControlProperty { get; set; }
 
             [DataMember]
             [DisplayName("Min position")]
@@ -78,13 +81,13 @@ namespace VRBuilder.VRIF.Conditions
         {
         }
 
-        public CheckControlPositionCondition(ILinearControlProperty control, float minPosition, float maxPosition, bool requireRelease = false, string name = null) : this(ProcessReferenceUtils.GetNameFrom(control), minPosition, maxPosition, requireRelease, name)
+        public CheckControlPositionCondition(IContinuousControlProperty control, float minPosition, float maxPosition, bool requireRelease = false, string name = null) : this(ProcessReferenceUtils.GetNameFrom(control), minPosition, maxPosition, requireRelease, name)
         {
         }
 
         public CheckControlPositionCondition(string controlName, float minPosition = 0, float maxPosition = 1, bool requireRelease = false, string name = "Check Control Position")
         {
-            Data.ControlProperty = new ScenePropertyReference<ILinearControlProperty>(controlName);
+            Data.ControlProperty = new ScenePropertyReference<IContinuousControlProperty>(controlName);
             Data.MinPosition = minPosition;
             Data.MaxPosition = maxPosition;
             Data.RequireRelease = requireRelease;

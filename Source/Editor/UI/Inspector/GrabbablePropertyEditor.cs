@@ -5,6 +5,9 @@ using VRBuilder.VRIF.Properties;
 
 namespace VRBuilder.Editor.VRIF.UI
 {
+    /// <summary>
+    /// Editor extension for <see cref="GrabbableProperty"/>, displaying a couple warnings.
+    /// </summary>
     [CustomEditor(typeof(GrabbableProperty))]
     public class GrabbablePropertyEditor : UnityEditor.Editor
     {

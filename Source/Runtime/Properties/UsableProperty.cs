@@ -6,49 +6,45 @@ using VRBuilder.Core.Properties;
 
 namespace VRBuilder.VRIF.Properties
 {
+    /// <summary>
+    /// Usable property for VRIF.
+    /// </summary>
     [AddComponentMenu("VR Builder/Properties/VRIF/Usable Property (VRIF)")]
     [RequireComponent(typeof(GrabbableProperty))]
     public class UsableProperty : LockableProperty, IUsableProperty
-    {
+    {        
+        /// <inheritdoc/>        
         public bool IsBeingUsed { get; private set; }
 
+        /// <inheritdoc/>        
         public event EventHandler<EventArgs> UsageStarted;
+
+        /// <inheritdoc/>        
         public event EventHandler<EventArgs> UsageStopped;
+       
+        private GrabbableProperty grabbableProperty;
 
-        private Grabbable grabbable;
-        private GrabbableUnityEvents grabbableEvents;
-
-        protected Grabbable Grabbable
+        /// <summary>
+        /// Grabbable property on this game object.
+        /// </summary>
+        public GrabbableProperty GrabbableProperty
         {
             get
             {
-                if (grabbable == null)
+                if (grabbableProperty == null)
                 {
-                    grabbable = GetComponent<Grabbable>();
+                    grabbableProperty = GetComponent<GrabbableProperty>();
                 }
 
-                return grabbable;
-            }
-        }
-
-        protected GrabbableUnityEvents GrabbableEvents
-        {
-            get
-            {
-                if (grabbableEvents == null)
-                {
-                    grabbableEvents = GetComponent<GrabbableUnityEvents>();
-                }
-
-                return grabbableEvents;
+                return grabbableProperty;
             }
         }
 
         protected override void OnEnable()
         {
             base.OnEnable();
-            GrabbableEvents.onTriggerDown.AddListener(HandleUsed);
-            GrabbableEvents.onTriggerUp.AddListener(HandleUnused);
+            GrabbableProperty.GrabbableEvents.onTriggerDown.AddListener(HandleUsed);
+            GrabbableProperty.GrabbableEvents.onTriggerUp.AddListener(HandleUnused);
 
             InternalSetLocked(IsLocked);
         }
@@ -56,8 +52,8 @@ namespace VRBuilder.VRIF.Properties
         protected override void OnDisable()
         {
             base.OnDisable();
-            GrabbableEvents.onTriggerDown.RemoveListener(HandleUsed);
-            GrabbableEvents.onTriggerUp.RemoveListener(HandleUnused);
+            GrabbableProperty.GrabbableEvents.onTriggerDown.RemoveListener(HandleUsed);
+            GrabbableProperty.GrabbableEvents.onTriggerUp.RemoveListener(HandleUnused);
         }
 
         private void HandleUsed()
@@ -80,7 +76,6 @@ namespace VRBuilder.VRIF.Properties
 
         protected override void InternalSetLocked(bool lockState)
         {
-            //TODO
         }
     }
 }

@@ -6,12 +6,18 @@ using VRBuilder.Core.Properties;
 
 namespace VRBuilder.VRIF.Properties
 {
+    /// <summary>
+    /// Snappable property for VRIF grabbables and snap zones.
+    /// </summary>
     [AddComponentMenu("VR Builder/Properties/VRIF/Snappable Property (VRIF)")]
     [RequireComponent(typeof(GrabbableProperty))]
     public class SnappableProperty : LockableProperty, ISnappableProperty
     {
         private GrabbableProperty grabbableProperty;
 
+        /// <summary>
+        /// The grabbable property on this game object.
+        /// </summary>
         protected GrabbableProperty GrabbableProperty
         { 
             get
@@ -24,14 +30,20 @@ namespace VRBuilder.VRIF.Properties
                 return grabbableProperty;
             }
         }        
+        
+        /// <inheritdoc/>        
+        public bool LockObjectOnSnap { get; set; }
 
-        public bool LockObjectOnSnap => throw new NotImplementedException();
-
+        /// <inheritdoc/>        
         public ISnapZoneProperty SnappedZone { get; set; }
 
+        /// <inheritdoc/>        
         public bool IsSnapped => GrabbableProperty.transform.parent != null && GrabbableProperty.transform.parent.GetComponent<SnapZone>() != null;
 
+        /// <inheritdoc/>        
         public event EventHandler<EventArgs> Snapped;
+
+        /// <inheritdoc/>        
         public event EventHandler<EventArgs> Unsnapped;
 
         protected override void OnEnable()

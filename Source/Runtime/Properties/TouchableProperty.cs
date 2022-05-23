@@ -6,15 +6,24 @@ using VRBuilder.Core.Properties;
 
 namespace VRBuilder.VRIF.Properties
 {
+    /// <summary>
+    /// Touchable property for VRIF.
+    /// </summary>
     [AddComponentMenu("VR Builder/Properties/VRIF/Touchable Property (VRIF)")]
     [RequireComponent(typeof(GrabbableUnityEvents))]
     public class TouchableProperty : LockableProperty, ITouchableProperty
     {
+        /// <inheritdoc/>        
         public event EventHandler<EventArgs> Touched;
+
+        /// <inheritdoc/>        
         public event EventHandler<EventArgs> Untouched;
 
         private GrabbableUnityEvents grabbableEvents;
 
+        /// <summary>
+        /// The event component on this game object.
+        /// </summary>
         public GrabbableUnityEvents GrabbableEvents
         {
             get
@@ -28,6 +37,7 @@ namespace VRBuilder.VRIF.Properties
             }
         }
 
+        /// <inheritdoc/>        
         public bool IsBeingTouched { get; private set; }
 
         protected override void OnEnable()
@@ -58,11 +68,12 @@ namespace VRBuilder.VRIF.Properties
 
         public void FastForwardTouch()
         {
+            Touched?.Invoke(this, EventArgs.Empty);
+            Untouched?.Invoke(this, EventArgs.Empty);
         }
 
         protected override void InternalSetLocked(bool lockState)
         {
-            //TODO
         }
     }
 }

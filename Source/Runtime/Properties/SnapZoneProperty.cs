@@ -7,11 +7,18 @@ using VRBuilder.Core.Properties;
 
 namespace VRBuilder.VRIF.Properties
 {
+    /// <summary>
+    /// Snap zone property for VRIF snap zones.
+    /// </summary>
     [AddComponentMenu("VR Builder/Properties/VRIF/Snap Zone Property (VRIF)")]
     [RequireComponent(typeof(SnapZone))]
     public class SnapZoneProperty : LockableProperty, ISnapZoneProperty
     {
         private SnapZone snapZone;
+
+        /// <summary>
+        /// The snap zone on this game object.
+        /// </summary>
         protected SnapZone SnapZone
         {
             get
@@ -25,14 +32,19 @@ namespace VRBuilder.VRIF.Properties
             }
         }
 
+        /// <inheritdoc/>        
         public bool IsObjectSnapped => SnapZone.HeldItem != null;
 
+        /// <inheritdoc/>        
         public ISnappableProperty SnappedObject { get; set; }
 
-
+        /// <inheritdoc/>        
         public GameObject SnapZoneObject => snapZone.gameObject;
 
+        /// <inheritdoc/>        
         public event EventHandler<EventArgs> ObjectSnapped;
+
+        /// <inheritdoc/>        
         public event EventHandler<EventArgs> ObjectUnsnapped;
 
         protected override void OnEnable()

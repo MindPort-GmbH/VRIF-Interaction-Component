@@ -5,13 +5,19 @@ using VRBuilder.Core.Properties;
 
 namespace VRBuilder.VRIF.Properties
 {
+    /// <summary>
+    /// Property that reads the position of a VRIF driving wheel as a -1 to 1 value.
+    /// </summary>
     [AddComponentMenu("VR Builder/Properties/VRIF/Wheel Property (VRIF)")]
     [RequireComponent(typeof(SteeringWheel))]
     [RequireComponent(typeof(GrabbableProperty))]
-    public class WheelProperty : LockableProperty, ILinearControlProperty
+    public class WheelProperty : LockableProperty, IContinuousControlProperty
     {
         private SteeringWheel wheel;
 
+        /// <summary>
+        /// Steering wheel component on this game object.
+        /// </summary>
         public SteeringWheel Wheel
         {
             get
@@ -28,6 +34,9 @@ namespace VRBuilder.VRIF.Properties
 
         private GrabbableProperty grabbableProperty;
 
+        /// <summary>
+        /// Grabbable property on this game object.
+        /// </summary>
         public GrabbableProperty GrabbableProperty
         {
             get
@@ -41,12 +50,21 @@ namespace VRBuilder.VRIF.Properties
             }
         }
 
+        /// <summary>
+        /// Position of the wheel as a -1 to 1 value.
+        /// </summary>
         public float Position => Wheel.GetScaledValue(Wheel.Angle, Wheel.MinAngle, Wheel.MaxAngle);
 
+        /// <inheritdoc/>
         public bool IsInteracting => GrabbableProperty.IsGrabbed;
 
+        /// <inheritdoc/>
         public event EventHandler<EventArgs> MinPosition;
+
+        /// <inheritdoc/>
         public event EventHandler<EventArgs> MaxPosition;
+
+        /// <inheritdoc/>
         public event EventHandler<EventArgs> ChangedPosition;
 
         protected override void OnEnable()

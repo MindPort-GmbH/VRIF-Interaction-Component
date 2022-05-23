@@ -6,6 +6,9 @@ using VRBuilder.Core.Properties;
 
 namespace VRBuilder.VRIF.Properties
 {
+    /// <summary>
+    /// Grabbable property for VRIF.
+    /// </summary>
     [AddComponentMenu("VR Builder/Properties/VRIF/Grabbable Property (VRIF)")]
     [RequireComponent(typeof(TouchableProperty))]
     public class GrabbableProperty : LockableProperty, IGrabbableProperty
@@ -28,6 +31,9 @@ namespace VRBuilder.VRIF.Properties
         /// </summary>
         public bool RequireTwoHandGrab => requireTwoHandGrab;
 
+        /// <summary>
+        /// The Grabbable component on this game object.
+        /// </summary>
         public Grabbable Grabbable
         {
             get
@@ -41,6 +47,9 @@ namespace VRBuilder.VRIF.Properties
             }
         }
 
+        /// <summary>
+        /// The events component on this game object.
+        /// </summary>
         public GrabbableUnityEvents GrabbableEvents
         {
             get
