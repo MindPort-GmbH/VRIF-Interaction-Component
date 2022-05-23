@@ -96,7 +96,7 @@ namespace VRBuilder.VRIF.Properties
 
         public void FastForwardPosition(float position)
         {
-            HandleValueChanged(position);
+            HandleValueChanged(position);            
         }
 
         protected override void InternalSetLocked(bool lockState)

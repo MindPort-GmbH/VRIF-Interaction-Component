@@ -28,7 +28,7 @@ It is recommended to disable the built-in XR Interaction Component to use this i
 If you are familiar with VR Builder and VRIF, the best way to start is probably the demo scene. A simple process will let you try all the integrated interactions one by one, and you will be able to check the process and the objects to see how they are configured.
 The first time you open the demo scene, you should do so from the menu: `Tools > VR Builder > Demo Scenes > VRIF Integration`. This will copy the process JSON in the StreamingAssets folder. The process will not work otherwise.
 
-The VR Builder demo is limited to a single table in a copy of the VRIF demo scene. You will be instructed by the VR Builder process to interact with the objects one by one, thus testing every tool provided.
+The VR Builder demo is limited to a single table in a copy of the VRIF demo scene. You will be instructed by the VR Builder process to interact with the objects one by one, thus testing every interaction provided.
 
 ![Demo Scene](images/demo-scene.png)
 
@@ -44,7 +44,7 @@ Note that a rigidbody is not automatically added to the object, as the `Grabbabl
 ![Grabbable Property](images/grabbable-property.png)
 
 An additional feature of this implementation is the possibility to require a two hand grab by ticking the corresponding checkbox on the component itself. In this case, the object will count as grabbed only if grabbed with both hands.
-Note that this does not inherently change the behavior of the object, for example by preventing the user from grabbing it with one hand only, but only what VR Builder considers a valid grab on the object.
+Note that this does not inherently change the behavior of the object, for example by preventing the user from grabbing it with one hand only. It only defines what VR Builder considers a valid grab on the object.
 
 ### Touchable Property
 Allows to use the Touch Object condition with VRIF.
