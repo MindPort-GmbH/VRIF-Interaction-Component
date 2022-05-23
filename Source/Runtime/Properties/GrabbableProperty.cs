@@ -91,12 +91,12 @@ namespace VRBuilder.VRIF.Properties
 
         protected override void InternalSetLocked(bool lockState)
         {
-            if (IsGrabbed)
-            {
-                Grabbable.DropItem(true, true);
-            }
+            //if (IsGrabbed)
+            //{
+            //    Grabbable.DropItem(true, true);
+            //}
 
-            Grabbable.enabled = !lockState;
+            //Grabbable.enabled = !lockState;
         }
 
         public void FastForwardGrab()
