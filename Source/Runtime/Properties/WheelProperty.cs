@@ -92,8 +92,6 @@ namespace VRBuilder.VRIF.Properties
             {
                 MaxPosition?.Invoke(this, EventArgs.Empty);
             }
-
-            Debug.Log(value);
         }
 
         public void FastForwardPosition(float position)
