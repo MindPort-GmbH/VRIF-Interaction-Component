@@ -7,7 +7,7 @@ using VRBuilder.Core.Properties;
 namespace VRBuilder.VRIF.Properties
 {
     /// <summary>
-    /// Snappable property for VRIF grabbables and snap zones.
+    /// Snappable property for snapping VRIF grabbables in VRIF snap zones.
     /// </summary>
     [AddComponentMenu("VR Builder/Properties/VRIF/Snappable Property (VRIF)")]
     [RequireComponent(typeof(GrabbableProperty))]
@@ -69,8 +69,6 @@ namespace VRBuilder.VRIF.Properties
 
         private void HandleSnapped()
         {
-            // TODO support lock on snap
-
             Transform parent = transform.parent;
             
             if(parent == null)
@@ -88,12 +86,20 @@ namespace VRBuilder.VRIF.Properties
             }
 
             SnappedZone = snapZone;
+
+            if (LockObjectOnSnap)
+            {
+                SceneObject.SetLocked(true);
+            }
+
             Snapped?.Invoke(this, EventArgs.Empty);
         }
 
         public void FastForwardSnapInto(ISnapZoneProperty snapZone)
         {
-            throw new NotImplementedException();
+            SnapZone snapZoneComponent = snapZone.SnapZoneObject.GetComponent<SnapZone>();
+
+            snapZoneComponent?.GrabGrabbable(grabbableProperty.Grabbable);
         }
 
         protected override void InternalSetLocked(bool lockState)
