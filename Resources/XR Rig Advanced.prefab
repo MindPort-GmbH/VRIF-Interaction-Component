@@ -19570,6 +19570,7 @@ GameObject:
   - component: {fileID: 3719865058603902630}
   - component: {fileID: 4276642494963342732}
   - component: {fileID: 543178982}
+  - component: {fileID: 26467448059037252}
   m_Layer: 0
   m_Name: CenterEyeAnchor
   m_TagString: MainCamera
@@ -19693,6 +19694,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Device: 0
+--- !u!114 &26467448059037252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2683195716758895196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f391ac734d94ea34697b6cde3269f11a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueName: User
 --- !u!1 &2683195716758895198
 GameObject:
   m_ObjectHideFlags: 0
@@ -19780,7 +19794,6 @@ GameObject:
   - component: {fileID: 8320362179581940914}
   - component: {fileID: 8320362179581940927}
   - component: {fileID: 111141501}
-  - component: {fileID: -6548484642282377737}
   m_Layer: 0
   m_Name: XR Rig Advanced
   m_TagString: Untagged
@@ -19947,19 +19960,6 @@ MonoBehaviour:
   HMDIsActive: 0
   LeftControllerPosition: {x: -0.2, y: -0.2, z: 0.5}
   RightControllerPosition: {x: 0.2, y: -0.2, z: 0.5}
---- !u!114 &-6548484642282377737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2683195716791022644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f391ac734d94ea34697b6cde3269f11a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uniqueName: User
 --- !u!1 &2683195717451339092
 GameObject:
   m_ObjectHideFlags: 0

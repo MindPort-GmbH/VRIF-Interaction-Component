@@ -2780,6 +2780,7 @@ GameObject:
   - component: {fileID: 5883667856961496371}
   - component: {fileID: 5117709272727730634}
   - component: {fileID: 6971661041198115719}
+  - component: {fileID: 199950433279812313}
   m_Layer: 0
   m_Name: CenterEyeAnchor
   m_TagString: MainCamera
@@ -2904,6 +2905,19 @@ MonoBehaviour:
   FadeInSpeed: 6
   FadeOutSpeed: 6
   SceneFadeInDelay: 1
+--- !u!114 &199950433279812313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5117709272727730633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f391ac734d94ea34697b6cde3269f11a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueName: User
 --- !u!1 &5117709272727892639
 GameObject:
   m_ObjectHideFlags: 0
@@ -3014,7 +3028,6 @@ GameObject:
   - component: {fileID: 1247141269419349799}
   - component: {fileID: 1247141269419349802}
   - component: {fileID: 966512732591709781}
-  - component: {fileID: 2054752355761789488}
   m_Layer: 0
   m_Name: XR Rig
   m_TagString: Untagged
@@ -3178,19 +3191,6 @@ MonoBehaviour:
   HMDIsActive: 0
   LeftControllerPosition: {x: -0.2, y: -0.2, z: 0.5}
   RightControllerPosition: {x: 0.2, y: -0.2, z: 0.5}
---- !u!114 &2054752355761789488
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5117709272763234209}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f391ac734d94ea34697b6cde3269f11a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uniqueName: User
 --- !u!1 &5117709273679435457
 GameObject:
   m_ObjectHideFlags: 0
