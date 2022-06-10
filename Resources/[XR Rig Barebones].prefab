@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 6567273623440199378}
   - component: {fileID: 2695909064958027348}
   m_Layer: 0
-  m_Name: XR Rig Barebones
+  m_Name: '[XR Rig Barebones]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
