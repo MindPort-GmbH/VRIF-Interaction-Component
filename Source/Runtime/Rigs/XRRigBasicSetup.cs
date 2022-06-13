@@ -11,6 +11,6 @@ namespace VRBuilder.VRIF.Rigs
         public override string Name => "XR Rig Basic";
 
         /// <inheritdoc/>
-        public override string PrefabName => "XR Rig Barebones";
+        public override string PrefabName => "[XR Rig Barebones]";
     }
 }

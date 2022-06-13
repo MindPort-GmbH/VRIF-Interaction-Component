@@ -12,5 +12,8 @@ namespace VRBuilder.VRIF.Configuration
 
         /// <inheritdoc/>
         public bool IsXRInteractionComponent => true;
+
+        /// <inheritdoc/>
+        public string DefaultRigPrefab => "[XR Rig Advanced]";
     }
 }
