@@ -2,13 +2,22 @@
 
 ## Introduction
 
-This add-on allows to use VR Builder together with VR Interaction Framework. A VR Builder process guides the user through the application, while VRIF provides the interactions in the scene.
+VR Builder is a tool for quickly creating sequential interactive processes, like for example tutorials, by using an easy to use visual editor. This add-on allows to use VR Builder together with VR Interaction Framework. It makes it possible for VR Builder to know when the user grabs something, if a lever has been pulled and so on. This way, it is possible to replace VR Builder's default interaction framework (XRIT) with VRIF, in order to leverage the unique strengths of the latter.
 
-## Requirements
+## Installation
 
-This add-on requires VR Builder version 2.1.0 or later to work.
+### Requirements
+- This add-on requires VR Builder version 2.2.0 or later to work.
+- This add-on is based on VRIF 1.81. Earlier versions might work, but they are untested.
 
-It is recommended to disable the built-in XR Interaction Component to use this integration. You can do so in `Project Settings > VR Builder > Settings`.
+### How to Install
+
+1. First, ensure that both VRIF and VR Builder are present in the project.
+1. As you are using a different interaction component, it is recommended to disable VR Builder's default interaction component. To do so, open `Project Settings > VR Builder > Settings` and uncheck `Enable built-in XR Interaction Component`.
+1. Navigate to `Assets/BNG Framework/Integrations/VR Builder` and import the Unity package for this add-on.
+1. Done! Now you can either open the demo scene from `Tools > VR Builder > Demo Scenes > VRIF Integration` or create a new VR Builder scene using the wizard by selecting `Tools > VR Builder > New Process Wizard...`.
+
+Note: VR Builder imports the XR Interaction Toolkit as a requirement for the built-in interaction component. If you don't need it, it is possible to remove it from the Package Manager after disabling the interaction component.
 
 ## Documentation
 

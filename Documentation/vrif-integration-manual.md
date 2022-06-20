@@ -6,6 +6,7 @@
     - [Requirements](#requirements)
     - [How to Install](#how-to-install)
 1. [Quick Start](#quick-start)
+1. [Differences from XRIT](#differences-from-xrit)
 1. [Properties](#data-properties)
     - [Grabbable Property](#grabbable-property)
     - [Touchable Property](#touchable-property)
@@ -17,7 +18,7 @@
 
 ## Introduction
 
-VR Builder is a tool for quickly creating sequential interactive processes, like for example tutorials, by using a simple visual editor. This add-on allows to use VR Builder together with VR Interaction Framework. It makes it possible for VR Builder to know when the user grabs something, if a lever has been pulled and so on. This way, it is possible to replace VR Builder's default interaction framework (XRIT) with VRIF, in order to leverage the unique strengths of the latter.
+VR Builder is a tool for quickly creating sequential interactive processes, like for example tutorials, by using an easy to use visual editor. This add-on allows to use VR Builder together with VR Interaction Framework. It makes it possible for VR Builder to know when the user grabs something, if a lever has been pulled and so on. This way, it is possible to replace VR Builder's default interaction framework (XRIT) with VRIF, in order to leverage the unique strengths of the latter.
 
 ## Installation
 
@@ -36,7 +37,9 @@ Note: VR Builder imports the XR Interaction Toolkit as a requirement for the bui
 
 ## Quick Start
 
-If you are familiar with VR Builder and VRIF, the best way to start is probably the demo scene. A simple process will let you try all the integrated interactions one by one, and you will be able to check the process and the objects to see how they are configured.
+If you are new to VR Builder, we strongly suggest getting familiar with the basics in the core [documentation](https://www.mindport.co/vr-builder/manual/introduction), also available in the asset's folder.
+
+Otherwise, the best way to start is probably the demo scene. A simple process will let you try all the integrated interactions one by one, and you will be able to check the process and the objects to see how they are configured.
 The first time you open the demo scene, you should do so from the menu: `Tools > VR Builder > Demo Scenes > VRIF Integration`. This will copy the process JSON in the StreamingAssets folder. The process will not work otherwise.
 
 The VR Builder demo is limited to a single table in a copy of the VRIF demo scene. You will be instructed by the VR Builder process to interact with the objects one by one, thus testing every interaction provided.
@@ -45,7 +48,11 @@ The VR Builder demo is limited to a single table in a copy of the VRIF demo scen
 
 ## Differences from XRIT
 
-//TODO
+VR Builder's interaction framework is by default the XR Interaction Toolkit by Unity. This add-on includes modified versions of some components so that VR Builder "understands" an interaction in VRIF instead of XRIT. However, while the exact same conditions are used, their functionality does not map one to one.
+Since the frameworks are different, interactions are handled in a different way and some components, e.g. snap zones, offer a different feature set.
+These differences are listed in the property descriptions below.
+
+At this time, the restrictive environment feature is not supported with VRIF. With restrictive environment enabled, an object would be for example grabbable only if the user is supposed to grab it in the current step, and could revert to non-interactable afterwards. Currently, VR Builder does not modify in any way the interactability of an object. It will just check if it is interacted with at the appropriate times, so the process can proceed. If you need an object to become non-interactable at some point, you will have to do that manually.
 
 ## Properties
 

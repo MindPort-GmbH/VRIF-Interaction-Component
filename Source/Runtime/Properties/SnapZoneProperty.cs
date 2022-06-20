@@ -89,7 +89,7 @@ namespace VRBuilder.VRIF.Properties
 
         protected override void InternalSetLocked(bool lockState)
         {
-            SnapZone.enabled = lockState == false || (SnappedObject != null);
+            //SnapZone.enabled = lockState == false || (SnappedObject != null);
         }
     }
 }
