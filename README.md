@@ -21,7 +21,7 @@ Note: VR Builder imports the XR Interaction Toolkit as a requirement for the bui
 
 ## Documentation
 
-You can find comprehensive documentation in the `Assets/MindPort/VR Builder/Add-ons/VRIF Interaction Component` folder.
+You can find comprehensive documentation in the [Documentation](/Documentation/vrif-integration-manual.md) folder.
 
 ## Contact
 
