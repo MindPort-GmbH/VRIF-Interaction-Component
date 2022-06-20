@@ -104,7 +104,7 @@ namespace VRBuilder.VRIF.Properties
 
         protected override void InternalSetLocked(bool lockState)
         {
-            GrabbableProperty.Grabbable.CanBeSnappedToSnapZone = enabled && !lockState;
+            //GrabbableProperty.Grabbable.CanBeSnappedToSnapZone = enabled && !lockState;
         }
     }
 }
