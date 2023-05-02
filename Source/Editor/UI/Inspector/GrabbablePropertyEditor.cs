@@ -28,6 +28,27 @@ namespace VRBuilder.Editor.VRIF.UI
                 }
             }
 
+            if(property.RequireTwoHandGrab)
+            {
+                if(grabbable.SecondaryGrabbable == null)
+                {
+                    EditorGUILayout.HelpBox("The grabbable's secondary grab behavior is set to dual grab but no secondary grabbable is referenced.", MessageType.Warning);
+                }
+                else
+                {
+                    if(grabbable.SecondaryGrabbable.GetComponent<GrabbableUnityEvents>() == null)
+                    {
+                        EditorGUILayout.HelpBox("VR Builder requires a GrabbableUnityEvents component on the secondary grabbable in order to recognize two hand grabbing.", MessageType.Warning);
+
+                        if (GUILayout.Button("Add component"))
+                        {
+                            grabbable.SecondaryGrabbable.gameObject.AddComponent<GrabbableUnityEvents>();
+                            EditorUtility.SetDirty(grabbable.SecondaryGrabbable);
+                        }
+                    }
+                }
+            }
+
             if(property.GetComponent<Rigidbody>() == null)
             {
                 EditorGUILayout.HelpBox("No rigidbody is present on this grabbable. A rigidbody is necessary if the object is not meant to be stationary, that is if the Grab Physics setting on the grabbable is set to anything other than None.", MessageType.Warning);

@@ -127,7 +127,6 @@ namespace VRBuilder.VRIF.Properties
 
         private void HandleGrabbed(Grabber grabber)
         {
-           //IsGrabbed = RequireTwoHandGrab ? Grabbable.BeingHeld && Grabbable.SecondaryGrabbable != null && Grabbable.SecondaryGrabbable.BeingHeld : Grabbable.BeingHeld;
             IsGrabbed = RequireTwoHandGrab ? Grabbable.BeingHeldWithTwoHands : Grabbable.BeingHeld;
             EmitGrabbed();            
         }
