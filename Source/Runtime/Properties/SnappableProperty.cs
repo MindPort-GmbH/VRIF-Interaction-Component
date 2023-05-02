@@ -1,6 +1,7 @@
 using BNG;
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 using VRBuilder.BasicInteraction.Properties;
 using VRBuilder.Core.Properties;
 
@@ -13,6 +14,13 @@ namespace VRBuilder.VRIF.Properties
     [RequireComponent(typeof(GrabbableProperty))]
     public class SnappableProperty : LockableProperty, ISnappableProperty
     {
+        [Header("Events")]
+        [SerializeField]
+        private UnityEvent<SnappablePropertyEventArgs> attachedToSnapZone = new UnityEvent<SnappablePropertyEventArgs>();
+
+        [SerializeField]
+        private UnityEvent<SnappablePropertyEventArgs> detachedFromSnapZone = new UnityEvent<SnappablePropertyEventArgs>();
+
         private GrabbableProperty grabbableProperty;
 
         /// <summary>
@@ -40,6 +48,10 @@ namespace VRBuilder.VRIF.Properties
         /// <inheritdoc/>        
         public bool IsSnapped => GrabbableProperty.transform.parent != null && GrabbableProperty.transform.parent.GetComponent<SnapZone>() != null;
 
+        public UnityEvent<SnappablePropertyEventArgs> AttachedToSnapZone => attachedToSnapZone;
+
+        public UnityEvent<SnappablePropertyEventArgs> DetachedFromSnapZone => detachedFromSnapZone;
+
         /// <inheritdoc/>        
         public event EventHandler<EventArgs> Snapped;
 
@@ -64,7 +76,7 @@ namespace VRBuilder.VRIF.Properties
 
         private void HandleUnsnapped()
         {
-            Unsnapped?.Invoke(this, EventArgs.Empty);
+            EmitUnsnapped(SnappedZone);
         }
 
         private void HandleSnapped()
@@ -92,7 +104,25 @@ namespace VRBuilder.VRIF.Properties
                 SceneObject.SetLocked(true);
             }
 
+            EmitSnapped(SnappedZone);
+        }
+
+        /// <summary>
+        /// Invokes the <see cref="EmitSnapped"/> event.
+        /// </summary>
+        protected void EmitSnapped(ISnapZoneProperty snapZone)
+        {
+            AttachedToSnapZone?.Invoke(new SnappablePropertyEventArgs(this, snapZone));
             Snapped?.Invoke(this, EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Invokes the <see cref="EmitUnsnapped"/> event.
+        /// </summary>
+        protected void EmitUnsnapped(ISnapZoneProperty snapZone)
+        {
+            DetachedFromSnapZone?.Invoke(new SnappablePropertyEventArgs(this, snapZone));
+            Unsnapped?.Invoke(this, EventArgs.Empty);
         }
 
         public void FastForwardSnapInto(ISnapZoneProperty snapZone)
@@ -104,7 +134,6 @@ namespace VRBuilder.VRIF.Properties
 
         protected override void InternalSetLocked(bool lockState)
         {
-            //GrabbableProperty.Grabbable.CanBeSnappedToSnapZone = enabled && !lockState;
         }
     }
 }
