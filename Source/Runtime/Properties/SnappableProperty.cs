@@ -93,7 +93,7 @@ namespace VRBuilder.VRIF.Properties
 
             if (snapZone == null)
             {
-                Debug.LogError($"Object {SceneObject.UniqueName} should be snapped but is not child of a {typeof(SnapZoneProperty).Name}.");
+                Debug.LogWarning($"Object {SceneObject.UniqueName} has been snapped to a snap zone without a {typeof(SnapZoneProperty).Name}. The VR Builder process will not see the object as snapped.");
                 return;
             }
 
