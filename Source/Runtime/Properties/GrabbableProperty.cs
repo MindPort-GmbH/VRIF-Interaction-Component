@@ -1,5 +1,6 @@
 using BNG;
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using VRBuilder.BasicInteraction.Properties;
@@ -73,11 +74,37 @@ namespace VRBuilder.VRIF.Properties
             }
         }
 
+        private GrabbableUnityEvents secondaryGrabbableEvents;
+
+        /// <summary>
+        /// Events component for secondary grabbable.
+        /// </summary>
+        public GrabbableUnityEvents SecondaryGrabbableEvents
+        {
+            get
+            {
+                if(secondaryGrabbableEvents == null && Grabbable.SecondaryGrabbable != null) 
+                {
+                    secondaryGrabbableEvents= Grabbable.SecondaryGrabbable.GetComponent<GrabbableUnityEvents>();
+
+                    if(secondaryGrabbableEvents == null)
+                    {
+                        secondaryGrabbableEvents = Grabbable.SecondaryGrabbable.AddComponent<GrabbableUnityEvents>();
+                    }
+                }
+
+                return secondaryGrabbableEvents;
+            }
+        }
+
         protected override void OnEnable()
         {
             base.OnEnable();
             GrabbableEvents.onGrab.AddListener(HandleGrabbed);
             GrabbableEvents.onRelease.AddListener(HandleReleased);
+
+            SecondaryGrabbableEvents?.onGrab.AddListener(HandleGrabbed);
+            SecondaryGrabbableEvents?.onRelease.AddListener(HandleReleased);
 
             InternalSetLocked(IsLocked);
         }
@@ -87,6 +114,9 @@ namespace VRBuilder.VRIF.Properties
             base.OnDisable();
             GrabbableEvents.onGrab.RemoveListener(HandleGrabbed);
             GrabbableEvents.onRelease.RemoveListener(HandleReleased);
+
+            SecondaryGrabbableEvents?.onGrab.RemoveListener(HandleGrabbed);
+            SecondaryGrabbableEvents?.onRelease.RemoveListener(HandleReleased);
         }
 
         private void HandleReleased()
@@ -97,7 +127,8 @@ namespace VRBuilder.VRIF.Properties
 
         private void HandleGrabbed(Grabber grabber)
         {
-            IsGrabbed = true;
+           //IsGrabbed = RequireTwoHandGrab ? Grabbable.BeingHeld && Grabbable.SecondaryGrabbable != null && Grabbable.SecondaryGrabbable.BeingHeld : Grabbable.BeingHeld;
+            IsGrabbed = RequireTwoHandGrab ? Grabbable.BeingHeldWithTwoHands : Grabbable.BeingHeld;
             EmitGrabbed();            
         }
 
