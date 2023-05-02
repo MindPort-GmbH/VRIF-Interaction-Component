@@ -23,8 +23,8 @@ VR Builder is a tool for quickly creating sequential interactive processes, like
 ## Installation
 
 ### Requirements
-- This add-on requires VR Builder version 2.2.0 or later to work.
-- This add-on is based on VRIF 1.81. Earlier versions might work, but they are untested.
+- This add-on requires VR Builder version 3.0.0 or later to work.
+- This add-on is based on VRIF 2.0. Earlier versions might work, but they are untested.
 
 ### How to Install
 
