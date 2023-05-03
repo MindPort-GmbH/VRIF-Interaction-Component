@@ -27,8 +27,7 @@ namespace VRBuilder.Editor.VRIF.UI
                     grabbable.SecondaryGrabBehavior = OtherGrabBehavior.DualGrab;
                 }
             }
-
-            if(property.RequireTwoHandGrab)
+            else if(property.RequireTwoHandGrab)
             {
                 if(grabbable.SecondaryGrabbable == null)
                 {

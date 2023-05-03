@@ -1,6 +1,5 @@
 using BNG;
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using VRBuilder.BasicInteraction.Properties;
@@ -86,11 +85,6 @@ namespace VRBuilder.VRIF.Properties
                 if(secondaryGrabbableEvents == null && Grabbable.SecondaryGrabbable != null) 
                 {
                     secondaryGrabbableEvents= Grabbable.SecondaryGrabbable.GetComponent<GrabbableUnityEvents>();
-
-                    if(secondaryGrabbableEvents == null)
-                    {
-                        secondaryGrabbableEvents = Grabbable.SecondaryGrabbable.AddComponent<GrabbableUnityEvents>();
-                    }
                 }
 
                 return secondaryGrabbableEvents;
