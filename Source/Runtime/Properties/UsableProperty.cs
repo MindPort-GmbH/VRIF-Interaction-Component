@@ -1,6 +1,6 @@
-using BNG;
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 using VRBuilder.BasicInteraction.Properties;
 using VRBuilder.Core.Properties;
 
@@ -12,7 +12,18 @@ namespace VRBuilder.VRIF.Properties
     [AddComponentMenu("VR Builder/Properties/VRIF/Usable Property (VRIF)")]
     [RequireComponent(typeof(GrabbableProperty))]
     public class UsableProperty : LockableProperty, IUsableProperty
-    {        
+    {
+        [Header("Events")]
+        [SerializeField]
+        private UnityEvent<UsablePropertyEventArgs> useStarted = new UnityEvent<UsablePropertyEventArgs>();
+
+        [SerializeField]
+        private UnityEvent<UsablePropertyEventArgs> useEnded = new UnityEvent<UsablePropertyEventArgs>();
+
+        public UnityEvent<UsablePropertyEventArgs> UseStarted => useStarted;
+
+        public UnityEvent<UsablePropertyEventArgs> UseEnded => useEnded;
+
         /// <inheritdoc/>        
         public bool IsBeingUsed { get; private set; }
 
@@ -59,13 +70,25 @@ namespace VRBuilder.VRIF.Properties
         private void HandleUsed()
         {
             IsBeingUsed = true;
-            UsageStarted?.Invoke(this, EventArgs.Empty);
+            EmitUsageStarted();
         }
 
         private void HandleUnused()
         {
             IsBeingUsed = false;
+            EmitUsageStopped();
+        }
+
+        protected void EmitUsageStarted()
+        {
+            UsageStarted?.Invoke(this, EventArgs.Empty);
+            UseStarted?.Invoke(new UsablePropertyEventArgs());
+        }
+
+        protected void EmitUsageStopped()
+        {
             UsageStopped?.Invoke(this, EventArgs.Empty);
+            UseEnded?.Invoke(new UsablePropertyEventArgs());
         }
 
         public void FastForwardUse()
@@ -76,6 +99,24 @@ namespace VRBuilder.VRIF.Properties
 
         protected override void InternalSetLocked(bool lockState)
         {
+        }
+
+        public void ForceSetUsed(bool isUsed)
+        {
+            if (IsBeingUsed == isUsed)
+            {
+                return;
+            }
+
+            IsBeingUsed = isUsed;
+            if (IsBeingUsed)
+            {
+                EmitUsageStarted();
+            }
+            else
+            {
+                EmitUsageStopped();
+            }
         }
     }
 }

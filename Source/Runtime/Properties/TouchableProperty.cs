@@ -1,6 +1,7 @@
 using BNG;
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 using VRBuilder.BasicInteraction.Properties;
 using VRBuilder.Core.Properties;
 
@@ -13,11 +14,24 @@ namespace VRBuilder.VRIF.Properties
     [RequireComponent(typeof(GrabbableUnityEvents))]
     public class TouchableProperty : LockableProperty, ITouchableProperty
     {
+        [Header("Events")]
+        [SerializeField]
+        private UnityEvent<TouchablePropertyEventArgs> touchStarted = new UnityEvent<TouchablePropertyEventArgs>();
+
+        [SerializeField]
+        private UnityEvent<TouchablePropertyEventArgs> touchEnded = new UnityEvent<TouchablePropertyEventArgs>();
+
         /// <inheritdoc/>        
         public event EventHandler<EventArgs> Touched;
 
         /// <inheritdoc/>        
         public event EventHandler<EventArgs> Untouched;
+
+        /// <inheritdoc/>        
+        public UnityEvent<TouchablePropertyEventArgs> TouchStarted => touchStarted;
+
+        /// <inheritdoc/>        
+        public UnityEvent<TouchablePropertyEventArgs> TouchEnded => touchEnded;
 
         private GrabbableUnityEvents grabbableEvents;
 
@@ -57,23 +71,53 @@ namespace VRBuilder.VRIF.Properties
         private void HandleTouch()
         {
             IsBeingTouched = true;
-            Touched?.Invoke(this, EventArgs.Empty);
+            EmitTouched();
         }
 
         private void HandleUntouch()
         {
             IsBeingTouched = false;
-            Untouched?.Invoke(this, EventArgs.Empty);
+            EmitUntouched();
         }
 
-        public void FastForwardTouch()
+        protected void EmitTouched()
         {
             Touched?.Invoke(this, EventArgs.Empty);
+            TouchStarted?.Invoke(new TouchablePropertyEventArgs());
+        }
+
+        protected void EmitUntouched()
+        {
             Untouched?.Invoke(this, EventArgs.Empty);
+            TouchEnded?.Invoke(new TouchablePropertyEventArgs());
         }
 
         protected override void InternalSetLocked(bool lockState)
         {
+        }
+
+        public void ForceSetTouched(bool isTouched)
+        {
+            if (IsBeingTouched == isTouched)
+            {
+                return;
+            }
+
+            IsBeingTouched = isTouched;
+            if (IsBeingTouched)
+            {
+                EmitTouched();
+            }
+            else
+            {
+                EmitUntouched();
+            }
+        }
+
+        public void FastForwardTouch()
+        {
+            EmitTouched();
+            EmitUntouched();
         }
     }
 }
