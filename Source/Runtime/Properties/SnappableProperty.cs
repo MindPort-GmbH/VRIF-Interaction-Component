@@ -27,7 +27,7 @@ namespace VRBuilder.VRIF.Properties
         /// The grabbable property on this game object.
         /// </summary>
         protected GrabbableProperty GrabbableProperty
-        { 
+        {
             get
             {
                 if (grabbableProperty == null)
@@ -37,8 +37,8 @@ namespace VRBuilder.VRIF.Properties
 
                 return grabbableProperty;
             }
-        }        
-        
+        }
+
         /// <inheritdoc/>        
         public bool LockObjectOnSnap { get; set; }
 
@@ -82,10 +82,10 @@ namespace VRBuilder.VRIF.Properties
         private void HandleSnapped()
         {
             Transform parent = transform.parent;
-            
-            if(parent == null)
+
+            if (parent == null)
             {
-                Debug.LogError($"Object {SceneObject.UniqueName} should be snapped but is not child object.");
+                Debug.LogError($"Object {SceneObject.GameObject.name} should be snapped but is not child object.");
                 return;
             }
 
@@ -93,7 +93,7 @@ namespace VRBuilder.VRIF.Properties
 
             if (snapZone == null)
             {
-                Debug.LogWarning($"Object {SceneObject.UniqueName} has been snapped to a snap zone without a {typeof(SnapZoneProperty).Name}. The VR Builder process will not see the object as snapped.");
+                Debug.LogWarning($"Object {SceneObject.GameObject.name} has been snapped to a snap zone without a {typeof(SnapZoneProperty).Name}. The VR Builder process will not see the object as snapped.");
                 return;
             }
 

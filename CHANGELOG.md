@@ -1,6 +1,11 @@
 # Changelog - VRIF Interaction Component
 
-**v2.0.0 (2023-05-03 - Current)**
+**v3.0.0 (2024-04-30 - Current)**
+
+*[Changed]*
+- Now compatible with VR Builder 4.0.0 and later versions.
+
+**v2.0.0 (2023-05-03)**
 
 *[Changed]*
 - Now compatible with VR Builder 3.0.0 and later versions.
