@@ -31,7 +31,7 @@ namespace VRBuilder.VRIF.Properties
         {
             get
             {
-                if(snapZone == null)
+                if (snapZone == null)
                 {
                     snapZone = GetComponent<SnapZone>();
                 }
@@ -80,7 +80,7 @@ namespace VRBuilder.VRIF.Properties
             SnappedObject = grabbable.GetComponent<SnappableProperty>();
             if (SnappedObject == null)
             {
-                Debug.LogWarning($"SnapZone '{SceneObject.UniqueName}' received snap from object '{grabbable.gameObject.name}' without {typeof(SnappableProperty).Name}");
+                Debug.LogWarning($"SnapZone '{SceneObject.GameObject.name}' received snap from object '{grabbable.gameObject.name}' without {typeof(SnappableProperty).Name}");
             }
             else
             {
@@ -116,7 +116,7 @@ namespace VRBuilder.VRIF.Properties
         }
 
         public void Configure(IMode mode)
-        {            
+        {
         }
 
         protected override void InternalSetLocked(bool lockState)
