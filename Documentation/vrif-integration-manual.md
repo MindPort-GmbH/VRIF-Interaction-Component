@@ -1,20 +1,24 @@
 # VRIF Interaction Component for VR Builder
 ## Table of Contents
 
-1. [Introduction](#introduction)
-1. [Installation](#installation)
+- [VRIF Interaction Component for VR Builder](#vrif-interaction-component-for-vr-builder)
+  - [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Installation](#installation)
     - [Requirements](#requirements)
     - [How to Install](#how-to-install)
-1. [Quick Start](#quick-start)
-1. [Differences from XRIT](#differences-from-xrit)
-1. [Properties](#data-properties)
+  - [Quick Start](#quick-start)
+  - [Differences from XRIT](#differences-from-xrit)
+  - [Properties](#properties)
     - [Grabbable Property](#grabbable-property)
     - [Touchable Property](#touchable-property)
     - [Usable Property](#usable-property)
     - [Snappable/Snap Zone Property](#snappablesnap-zone-property)
     - [Lever/Wheel Property](#leverwheel-property)
-1. [Check Control Position Condition](#check-control-position-condition)
-1. [Contact](#contact)
+  - [Check Control Position Condition](#check-control-position-condition)
+    - [Description](#description)
+      - [Configuration](#configuration)
+  - [Contact](#contact)
 
 ## Introduction
 
@@ -23,7 +27,7 @@ VR Builder is a tool for quickly creating sequential interactive processes, like
 ## Installation
 
 ### Requirements
-- This add-on requires VR Builder version 3.0.0 or later to work.
+- This add-on requires VR Builder version 4.0.0 or later to work.
 - This add-on is based on VRIF 2.0. Earlier versions might work, but they are untested.
 
 ### How to Install
