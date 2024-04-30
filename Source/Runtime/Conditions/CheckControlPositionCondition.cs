@@ -1,3 +1,4 @@
+using System;
 using System.Runtime.Serialization;
 using UnityEngine;
 using VRBuilder.Core;
@@ -20,6 +21,12 @@ namespace VRBuilder.VRIF.Conditions
         {
             [DataMember]
             [DisplayName("Control")]
+            public SingleScenePropertyReference<IContinuousControlProperty> ContinuousControl { get; set; }
+
+            [DataMember]
+            [HideInProcessInspector]
+            [Obsolete("Use ContinuousControl instead.")]
+            [LegacyProperty(nameof(ContinuousControl))]
             public ScenePropertyReference<IContinuousControlProperty> ControlProperty { get; set; }
 
             [DataMember]
@@ -38,7 +45,7 @@ namespace VRBuilder.VRIF.Conditions
 
             [DataMember]
             [HideInProcessInspector]
-            public string Name { get; set; }
+            public string Name => $"Set {ContinuousControl} between {MinPosition} and {MaxPosition}";
 
             public Metadata Metadata { get; set; }
         }
@@ -51,7 +58,7 @@ namespace VRBuilder.VRIF.Conditions
 
             public override void Complete()
             {
-                Data.ControlProperty.Value.FastForwardPosition(Data.MinPosition + (Data.MaxPosition - Data.MinPosition) / 2);
+                Data.ContinuousControl.Value.FastForwardPosition(Data.MinPosition + (Data.MaxPosition - Data.MinPosition) / 2);
             }
         }
 
@@ -59,17 +66,17 @@ namespace VRBuilder.VRIF.Conditions
         {
             protected override bool CheckIfCompleted()
             {
-                if(Data.MinPosition > Data.MaxPosition)
+                if (Data.MinPosition > Data.MaxPosition)
                 {
-                    Debug.LogError($"{typeof(CheckControlPositionCondition).Name} for object {Data.ControlProperty.UniqueName} will never complete as the minimum value is greater than the maximum value.");
+                    Debug.LogError($"{typeof(CheckControlPositionCondition).Name} for object {Data.ContinuousControl} will never complete as the minimum value is greater than the maximum value.");
                 }
 
-                if(Data.RequireRelease && Data.ControlProperty.Value.IsInteracting)
+                if (Data.RequireRelease && Data.ContinuousControl.Value.IsInteracting)
                 {
                     return false;
                 }
 
-                return Data.ControlProperty.Value.Position >= Data.MinPosition && Data.ControlProperty.Value.Position <= Data.MaxPosition;
+                return Data.ContinuousControl.Value.Position >= Data.MinPosition && Data.ContinuousControl.Value.Position <= Data.MaxPosition;
             }
 
             public ActiveProcess(EntityData data) : base(data)
@@ -77,21 +84,20 @@ namespace VRBuilder.VRIF.Conditions
             }
         }
 
-        public CheckControlPositionCondition() : this("")
+        public CheckControlPositionCondition() : this(Guid.Empty)
         {
         }
 
-        public CheckControlPositionCondition(IContinuousControlProperty control, float minPosition, float maxPosition, bool requireRelease = false, string name = null) : this(ProcessReferenceUtils.GetNameFrom(control), minPosition, maxPosition, requireRelease, name)
+        public CheckControlPositionCondition(IContinuousControlProperty control, float minPosition, float maxPosition, bool requireRelease = false) : this(ProcessReferenceUtils.GetUniqueIdFrom(control), minPosition, maxPosition, requireRelease)
         {
         }
 
-        public CheckControlPositionCondition(string controlName, float minPosition = 0, float maxPosition = 1, bool requireRelease = false, string name = "Check Control Position")
+        public CheckControlPositionCondition(Guid control, float minPosition = 0, float maxPosition = 1, bool requireRelease = false)
         {
-            Data.ControlProperty = new ScenePropertyReference<IContinuousControlProperty>(controlName);
+            Data.ContinuousControl = new SingleScenePropertyReference<IContinuousControlProperty>(control);
             Data.MinPosition = minPosition;
             Data.MaxPosition = maxPosition;
             Data.RequireRelease = requireRelease;
-            Data.Name = name;
         }
 
         public override IStageProcess GetActiveProcess()
