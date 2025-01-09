@@ -24,12 +24,6 @@ namespace VRBuilder.VRIF.Conditions
             public SingleScenePropertyReference<IContinuousControlProperty> ContinuousControl { get; set; }
 
             [DataMember]
-            [HideInProcessInspector]
-            [Obsolete("Use ContinuousControl instead.")]
-            [LegacyProperty(nameof(ContinuousControl))]
-            public ScenePropertyReference<IContinuousControlProperty> ControlProperty { get; set; }
-
-            [DataMember]
             [DisplayName("Min position")]
             public float MinPosition { get; set; }
 
