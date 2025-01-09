@@ -17,7 +17,9 @@ VR Builder is a tool for quickly creating sequential interactive processes, like
 1. Navigate to `Assets/BNG Framework/Integrations/VR Builder` and import the Unity package for this add-on.
 1. Done! Now you can either open the demo scene from `Tools > VR Builder > Demo Scenes > VRIF Integration` or create a new VR Builder scene using the wizard by selecting `Tools > VR Builder > New Process Wizard...`.
 
-Note: VR Builder imports the XR Interaction Toolkit as a requirement for the built-in interaction component. If you don't need it, it is possible to remove it from the Package Manager after disabling the interaction component.
+    Note: VR Builder imports the XR Interaction Toolkit as a requirement for the built-in interaction component. If you don't need it, it is possible to remove it from the Package Manager after disabling the interaction component.
+
+    Note: The VR Builder Core demo scene is not designed to work with VRIF and might not work properly. Make sure you load the VRIF Integration demo scene instead.
 
 ## Documentation
 
